@@ -121,7 +121,7 @@ export default function App() {
     }
   };
 
-  const sendRequest = async (serviceId: string, actionId: string, qty: string) => {
+  const sendRequest = (serviceId: string, actionId: string, qty: string) => {
     playClickSound();
     const link = urls[serviceId];
     if (!link) {
@@ -130,26 +130,35 @@ export default function App() {
     }
 
     try {
-      // Direct API call
       const apiKey = 'a943a437571dc1256018f010bb4d8ab5'; // Fallback key
       
-      const formData = new URLSearchParams();
-      formData.append('key', apiKey);
-      formData.append('action', 'add');
-      formData.append('service', actionId);
-      formData.append('link', link);
-      formData.append('quantity', qty);
+      // Create a hidden form to bypass CORS restrictions on GitHub Pages
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://nstechfollows.com/api/v2';
+      form.target = 'hidden_iframe';
 
-      const response = await fetch('https://nstechfollows.com/api/v2', { 
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: formData.toString()
-      });
+      const params: Record<string, string> = {
+        key: apiKey,
+        action: 'add',
+        service: actionId,
+        link: link,
+        quantity: qty
+      };
 
-      // With no-cors, we can't read the response, but we assume it was sent
+      for (const key in params) {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = key;
+        input.value = params[key];
+        form.appendChild(input);
+      }
+
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+
+      // We assume it was sent successfully since form submission doesn't throw CORS errors
       alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
       
       // Clear existing timer if any
@@ -179,6 +188,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-green-50 text-gray-800 font-sans pb-10">
+      <iframe name="hidden_iframe" style={{ display: 'none' }}></iframe>
       {/* Navbar */}
       <div className="bg-white p-5 font-black text-2xl shadow-sm sticky top-0 z-50 relative flex items-center justify-center gap-2">
         <Rocket className="text-purple-600" size={28} />
