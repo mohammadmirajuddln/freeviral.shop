@@ -132,9 +132,22 @@ export default function App() {
     try {
       // Direct API call
       const apiKey = 'a943a437571dc1256018f010bb4d8ab5'; // Fallback key
-      const apiUrl = `https://nstechfollows.com/api/v2?key=${apiKey}&action=add&service=${actionId}&link=${encodeURIComponent(link)}&quantity=${qty}`;
       
-      const response = await fetch(apiUrl, { mode: 'no-cors' });
+      const formData = new URLSearchParams();
+      formData.append('key', apiKey);
+      formData.append('action', 'add');
+      formData.append('service', actionId);
+      formData.append('link', link);
+      formData.append('quantity', qty);
+
+      const response = await fetch('https://nstechfollows.com/api/v2', { 
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: formData.toString()
+      });
 
       // With no-cors, we can't read the response, but we assume it was sent
       alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
