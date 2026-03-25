@@ -20,9 +20,18 @@ async function startServer() {
     }
 
     try {
-      const apiUrl = `https://nstechfollows.com/api/v2?key=${apiKey}&action=add&service=${service}&link=${encodeURIComponent(link)}&quantity=${quantity}`;
+      const params = new URLSearchParams();
+      params.append('key', apiKey);
+      params.append('action', 'add');
+      params.append('service', service.toString());
+      params.append('link', link);
+      params.append('quantity', quantity.toString());
+
+      const response = await fetch('https://nstechfollows.com/api/v2', {
+        method: 'POST',
+        body: params
+      });
       
-      const response = await fetch(apiUrl);
       const data = await response.json();
       
       res.json(data);

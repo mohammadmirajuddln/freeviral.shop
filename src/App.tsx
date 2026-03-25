@@ -130,7 +130,7 @@ export default function App() {
     }
 
     try {
-      const apiKey = 'a943a437571dc1256018f010bb4d8ab5'; // Fallback key
+      const apiKey = 'a943a437571dc1256018f010bb4d8ab5';
       
       // Create a hidden form to bypass CORS restrictions on GitHub Pages
       const form = document.createElement('form');
@@ -160,7 +160,6 @@ export default function App() {
         document.body.removeChild(form);
       }, 1000);
 
-      // We assume it was sent successfully since form submission doesn't throw CORS errors
       alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
       
       // Clear existing timer if any
