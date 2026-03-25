@@ -156,7 +156,9 @@ export default function App() {
 
       document.body.appendChild(form);
       form.submit();
-      document.body.removeChild(form);
+      setTimeout(() => {
+        document.body.removeChild(form);
+      }, 1000);
 
       // We assume it was sent successfully since form submission doesn't throw CORS errors
       alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
