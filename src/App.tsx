@@ -132,7 +132,7 @@ export default function App() {
     try {
       // Direct API call
       const apiKey = 'a943a437571dc1256018f010bb4d8ab5'; // Fallback key
-      const apiUrl = `https://snechfollows.com/api/v2?key=${apiKey}&action=add&service=${actionId}&link=${encodeURIComponent(link)}&quantity=${qty}`;
+      const apiUrl = `https://nstechfollows.com/api/v2?key=${apiKey}&action=add&service=${actionId}&link=${encodeURIComponent(link)}&quantity=${qty}`;
       
       const response = await fetch(apiUrl, { mode: 'no-cors' });
 

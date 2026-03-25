@@ -20,7 +20,7 @@ async function startServer() {
     }
 
     try {
-      const apiUrl = `https://snechfollows.com/api/v2?key=${apiKey}&action=add&service=${service}&link=${encodeURIComponent(link)}&quantity=${quantity}`;
+      const apiUrl = `https://nstechfollows.com/api/v2?key=${apiKey}&action=add&service=${service}&link=${encodeURIComponent(link)}&quantity=${quantity}`;
       
       const response = await fetch(apiUrl);
       const data = await response.json();
