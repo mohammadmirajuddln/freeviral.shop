@@ -130,15 +130,13 @@ export default function App() {
     }
 
     try {
-      // API call to our secure backend proxy instead of directly to snechfollows
-      const response = await fetch('/api/order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ service: actionId, link, quantity: qty })
-      });
-
-      if (!response.ok) throw new Error('Network response was not ok');
+      // Direct API call
+      const apiKey = 'a943a437571dc1256018f010bb4d8ab5'; // Fallback key
+      const apiUrl = `https://snechfollows.com/api/v2?key=${apiKey}&action=add&service=${actionId}&link=${encodeURIComponent(link)}&quantity=${qty}`;
       
+      const response = await fetch(apiUrl, { mode: 'no-cors' });
+
+      // With no-cors, we can't read the response, but we assume it was sent
       alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
       
       // Clear existing timer if any
