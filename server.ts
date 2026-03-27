@@ -13,7 +13,7 @@ async function startServer() {
     const { service, link, quantity } = req.body;
     
     // Fallback key for demo purposes, but it's now hidden from the browser!
-    const apiKey = process.env.SNECH_API_KEY || 'a943a437571dc1256018f010bb4d8ab5';
+    const apiKey = process.env.SNECH_API_KEY || '49514190f31742df7df997990278043e';
 
     if (!link) {
       return res.status(400).json({ error: 'Link is required' });
@@ -27,7 +27,7 @@ async function startServer() {
       params.append('link', link);
       params.append('quantity', quantity.toString());
 
-      const response = await fetch('https://nstechfollows.com/api/v2', {
+      const response = await fetch('https://bdlikefollower.com/api/v2', {
         method: 'POST',
         body: params
       });

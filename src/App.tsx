@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Copy, Heart, Eye, Share2, Flag, Link as LinkIcon, Sparkles, Rocket, Facebook, Send, MessageCircle } from 'lucide-react';
+import { Copy, Heart, Eye, Share2, UserPlus, Link as LinkIcon, Sparkles, Rocket, Facebook, Send, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 const SERVICES = [
@@ -10,10 +10,10 @@ const SERVICES = [
     gradient: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600',
     icon: 'https://cdn-icons-png.flaticon.com/512/3046/3046121.png',
     actions: [
-      { id: '1', name: 'Like', icon: <Heart size={16} />, qty: '15' },
-      { id: '2', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '3', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '4', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '3639', name: 'Like', icon: <Heart size={16} />, qty: '200' },
+      { id: '2578', name: 'View', icon: <Eye size={16} />, qty: '1000' },
+      { id: '2802', name: 'Share', icon: <Share2 size={16} />, qty: '500' },
+      { id: '3698', name: 'Follow', icon: <UserPlus size={16} />, qty: '200' },
     ]
   },
   {
@@ -23,23 +23,23 @@ const SERVICES = [
     gradient: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600',
     icon: 'https://cdn-icons-png.flaticon.com/512/174/174855.png',
     actions: [
-      { id: '5', name: 'Like', icon: <Heart size={16} />, qty: '15' },
-      { id: '6', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '7', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '8', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '3564', name: 'Like', icon: <Heart size={16} />, qty: '200' },
+      { id: '3681', name: 'View', icon: <Eye size={16} />, qty: '500' },
+      { id: '3789', name: 'Share', icon: <Share2 size={16} />, qty: '100' },
+      { id: '2537', name: 'Follow', icon: <UserPlus size={16} />, qty: '500' },
     ]
   },
   {
-    id: 'likee',
-    name: 'Likee',
-    color: '#FF0050',
-    gradient: 'bg-gradient-to-r from-pink-500 to-rose-500',
-    icon: 'https://cdn-icons-png.flaticon.com/512/2589/2589175.png',
+    id: 'facebook',
+    name: 'Facebook',
+    color: '#1877F2',
+    gradient: 'bg-gradient-to-r from-blue-500 to-blue-700',
+    icon: 'https://cdn-icons-png.flaticon.com/512/124/124010.png',
     actions: [
-      { id: '9', name: 'Like', icon: <Heart size={16} />, qty: '15' },
-      { id: '10', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '11', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '12', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '3647', name: 'Like', icon: <Heart size={16} />, qty: '300' },
+      { id: '3622', name: 'View', icon: <Eye size={16} />, qty: '500' },
+      { id: '2927', name: 'Share', icon: <Share2 size={16} />, qty: '200' },
+      { id: '3730', name: 'Follow', icon: <UserPlus size={16} />, qty: '200' },
     ]
   }
 ];
@@ -130,12 +130,12 @@ export default function App() {
     }
 
     try {
-      const apiKey = 'a943a437571dc1256018f010bb4d8ab5';
+      const apiKey = '49514190f31742df7df997990278043e';
       
       // Create a hidden form to bypass CORS restrictions on GitHub Pages
       const form = document.createElement('form');
       form.method = 'POST';
-      form.action = 'https://nstechfollows.com/api/v2';
+      form.action = 'https://bdlikefollower.com/api/v2';
       form.target = 'hidden_iframe';
 
       const params: Record<string, string> = {
