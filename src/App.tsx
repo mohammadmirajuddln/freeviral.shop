@@ -130,24 +130,22 @@ export default function App() {
     }
 
     try {
-      const apiKey = '49514190f31742df7df997990278043e';
-      
-      const formData = new URLSearchParams();
-      formData.append('key', apiKey);
-      formData.append('action', 'add');
-      formData.append('service', actionId);
-      formData.append('link', link);
-      formData.append('quantity', qty);
-
-      fetch('https://bdlikefollower.com/api/v2', {
+      fetch('/api/order', {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
         },
-        body: formData.toString()
-      }).then(() => {
-        console.log('Request sent');
+        body: JSON.stringify({
+          service: actionId,
+          link: link,
+          quantity: qty
+        })
+      }).then(async (res) => {
+        if (!res.ok) {
+          console.error('Server error:', await res.text());
+        } else {
+          console.log('Request sent successfully');
+        }
       }).catch((error) => {
         console.error('Network error:', error);
       });
