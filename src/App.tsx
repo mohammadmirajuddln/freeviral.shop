@@ -10,10 +10,10 @@ const SERVICES = [
     gradient: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600',
     icon: 'https://cdn-icons-png.flaticon.com/512/3046/3046121.png',
     actions: [
-      { id: '1', name: 'Like', icon: <Heart size={16} />, qty: '15' },
-      { id: '2', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '3', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '4', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '12551', name: 'Like', icon: <Heart size={16} />, qty: '15' },
+      { id: '12285', name: 'View', icon: <Eye size={16} />, qty: '300' },
+      { id: '12551', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
+      { id: '12551', name: 'Report', icon: <Flag size={16} />, qty: '1' },
     ]
   },
   {
@@ -23,10 +23,10 @@ const SERVICES = [
     gradient: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600',
     icon: 'https://cdn-icons-png.flaticon.com/512/174/174855.png',
     actions: [
-      { id: '5', name: 'Like', icon: <Heart size={16} />, qty: '15' },
-      { id: '6', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '7', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '8', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '12212', name: 'Like', icon: <Heart size={16} />, qty: '15' },
+      { id: '12212', name: 'View', icon: <Eye size={16} />, qty: '300' },
+      { id: '12212', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
+      { id: '12212', name: 'Report', icon: <Flag size={16} />, qty: '1' },
     ]
   },
   {
@@ -36,10 +36,10 @@ const SERVICES = [
     gradient: 'bg-gradient-to-r from-pink-500 to-rose-500',
     icon: 'https://cdn-icons-png.flaticon.com/512/2589/2589175.png',
     actions: [
-      { id: '9', name: 'Like', icon: <Heart size={16} />, qty: '15' },
-      { id: '10', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '11', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '12', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '12551', name: 'Like', icon: <Heart size={16} />, qty: '15' },
+      { id: '12285', name: 'View', icon: <Eye size={16} />, qty: '300' },
+      { id: '12551', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
+      { id: '12551', name: 'Report', icon: <Flag size={16} />, qty: '1' },
     ]
   }
 ];
@@ -146,7 +146,13 @@ export default function App() {
 
       if (!res.ok || data.error) {
         console.error('API Error:', data.error || 'Unknown error');
-        alert(`সমস্যা হয়েছে: ${data.error || 'Unknown error'}`);
+        
+        // Provide a more user-friendly message for insufficient balance
+        if (data.error && data.error.toLowerCase().includes('sufficient balance')) {
+          alert('দুঃখিত, বর্তমানে সার্ভারে পর্যাপ্ত ব্যালেন্স নেই। দয়া করে পরে আবার চেষ্টা করুন অথবা অ্যাডমিনের সাথে যোগাযোগ করুন।');
+        } else {
+          alert(`সমস্যা হয়েছে: ${data.error || 'Unknown error'}`);
+        }
         return;
       }
 
