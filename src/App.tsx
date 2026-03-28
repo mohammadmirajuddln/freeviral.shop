@@ -121,7 +121,7 @@ export default function App() {
     }
   };
 
-  const sendRequest = (serviceId: string, actionId: string, qty: string) => {
+  const sendRequest = async (serviceId: string, actionId: string, qty: string) => {
     playClickSound();
     const link = urls[serviceId];
     if (!link) {
@@ -130,7 +130,7 @@ export default function App() {
     }
 
     try {
-      fetch('/api/order', {
+      const res = await fetch('/api/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -140,16 +140,17 @@ export default function App() {
           link: link,
           quantity: qty
         })
-      }).then(async (res) => {
-        if (!res.ok) {
-          console.error('Server error:', await res.text());
-        } else {
-          console.log('Request sent successfully');
-        }
-      }).catch((error) => {
-        console.error('Network error:', error);
       });
 
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        console.error('API Error:', data.error || 'Unknown error');
+        alert(`সমস্যা হয়েছে: ${data.error || 'Unknown error'}`);
+        return;
+      }
+
+      console.log('Request sent successfully:', data);
       alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
       
       // Clear existing timer if any
@@ -172,8 +173,8 @@ export default function App() {
       }, 1000);
 
     } catch (error) {
-      console.error('Error:', error);
-      alert("সমস্যা হয়েছে! ইন্টারনেট কানেকশন চেক করুন।");
+      console.error('Network error:', error);
+      alert("সমস্যা হয়েছে! ইন্টারনেট কানেকশন চেক করুন বা পরে আবার চেষ্টা করুন।");
     }
   };
 

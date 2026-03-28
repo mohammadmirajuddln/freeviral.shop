@@ -1,25 +1,25 @@
 import fetch from 'node-fetch';
 
-async function testServices() {
+async function testApi() {
   const apiKey = '49514190f31742df7df997990278043e';
   const url = 'https://bdlikefollower.com/api/v2';
 
   const params = new URLSearchParams();
   params.append('key', apiKey);
-  params.append('action', 'services');
+  params.append('action', 'balance');
 
   try {
+    console.log('Sending request to', url);
     const response = await fetch(url, {
       method: 'POST',
       body: params
     });
-    const data = await response.json();
-    console.log('Total services:', data.length);
-    // Print first 5 services to see the structure
-    console.log(data.slice(0, 5));
+    console.log('Status:', response.status);
+    const text = await response.text();
+    console.log('Response:', text);
   } catch (error) {
     console.error('Error:', error);
   }
 }
 
-testServices();
+testApi();
