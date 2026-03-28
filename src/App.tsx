@@ -132,33 +132,25 @@ export default function App() {
     try {
       const apiKey = '49514190f31742df7df997990278043e';
       
-      // Create a hidden form to bypass CORS restrictions on GitHub Pages
-      const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = 'https://bdlikefollower.com/api/v2';
-      form.target = 'hidden_iframe';
+      const formData = new URLSearchParams();
+      formData.append('key', apiKey);
+      formData.append('action', 'add');
+      formData.append('service', actionId);
+      formData.append('link', link);
+      formData.append('quantity', qty);
 
-      const params: Record<string, string> = {
-        key: apiKey,
-        action: 'add',
-        service: actionId,
-        link: link,
-        quantity: qty
-      };
-
-      for (const key in params) {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = params[key];
-        form.appendChild(input);
-      }
-
-      document.body.appendChild(form);
-      form.submit();
-      setTimeout(() => {
-        document.body.removeChild(form);
-      }, 1000);
+      fetch('https://bdlikefollower.com/api/v2', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString()
+      }).then(() => {
+        console.log('Request sent');
+      }).catch((error) => {
+        console.error('Network error:', error);
+      });
 
       alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
       
@@ -189,7 +181,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-green-50 text-gray-800 font-sans pb-10">
-      <iframe name="hidden_iframe" style={{ display: 'none' }}></iframe>
       {/* Navbar */}
       <div className="bg-white p-5 font-black text-2xl shadow-sm sticky top-0 z-50 relative flex items-center justify-center gap-2">
         <Rocket className="text-purple-600" size={28} />
