@@ -13,7 +13,7 @@ async function startServer() {
     const { service, link, quantity } = req.body;
     
     // Using the new API key and provider provided by the user
-    const apiKey = process.env.NSTECH_API_KEY || '24585759138d901cbc7cdbab19842cb0';
+    const apiKey = process.env.NSTECH_API_KEY || '104aa75459b1cda29f342be919769bac';
 
     if (!link) {
       return res.status(400).json({ error: 'Link is required' });
