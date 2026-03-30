@@ -1,10 +1,18 @@
 import express from 'express';
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
+import cors from 'cors';
 
 async function startServer() {
   const app = express();
   const PORT = parseInt(process.env.PORT || '3000', 10);
+
+  // Enable CORS for all origins so the frontend on GitHub Pages can call this backend
+  app.use(cors({
+    origin: '*', // Allow all origins (e.g., https://freeviral.shop)
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 
   app.use(express.json());
 

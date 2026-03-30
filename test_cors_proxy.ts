@@ -1,28 +1,24 @@
 import fetch from 'node-fetch';
 
-async function testCorsProxy() {
-  const apiKey = '49514190f31742df7df997990278043e';
-  const targetUrl = encodeURIComponent('https://bdlikefollower.com/api/v2');
-  const url = `https://corsproxy.io/?${targetUrl}`;
-
-  const params = new URLSearchParams();
-  params.append('key', apiKey);
-  params.append('action', 'add');
-  params.append('service', '3639'); // TikTok Like
-  params.append('link', 'https://www.tiktok.com/@user/video/1234567890');
-  params.append('quantity', '15'); // Too low
-
+async function test() {
   try {
-    const response = await fetch(url, {
+    const params = new URLSearchParams();
+    params.append('key', '104aa75459b1cda29f342be919769bac');
+    params.append('action', 'balance');
+
+    const res = await fetch('https://corsproxy.io/?https://nstechfollows.com/api/v2', {
       method: 'POST',
+      headers: {
+        'Origin': 'https://freeviral.shop',
+        'Referer': 'https://freeviral.shop/'
+      },
       body: params
     });
-    console.log('Status:', response.status);
-    const text = await response.text();
+    const text = await res.text();
+    console.log('Status:', res.status);
     console.log('Response:', text);
-  } catch (error) {
-    console.error('Error:', error);
+  } catch (e) {
+    console.error(e);
   }
 }
-
-testCorsProxy();
+test();

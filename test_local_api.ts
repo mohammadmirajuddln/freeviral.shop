@@ -1,24 +1,21 @@
-import fetch from 'node-fetch';
+import fetch from 'node-fetch'; // Just to simulate if needed, but we can use native fetch
 
-async function testLocalApi() {
+async function test() {
   try {
     const res = await fetch('http://localhost:3000/api/order', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         service: '12551',
-        link: 'https://www.tiktok.com/@example/video/123456789',
+        link: 'https://tiktok.com/@test/video/123',
         quantity: '15'
       })
     });
-    console.log('Status:', res.status);
     const text = await res.text();
+    console.log('Status:', res.status);
     console.log('Response:', text);
-  } catch (err) {
-    console.error('Error:', err);
+  } catch (e) {
+    console.error('Error:', e);
   }
 }
-
-testLocalApi();
+test();

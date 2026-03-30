@@ -130,7 +130,14 @@ export default function App() {
     }
 
     try {
-      const res = await fetch('/api/order', {
+      // Use the AI Studio backend proxy if running on GitHub Pages (freeviral.shop)
+      // Otherwise use the relative path for local development
+      const isProduction = window.location.hostname === 'freeviral.shop';
+      const apiUrl = isProduction 
+        ? 'https://ais-pre-ppwebzkzzz65h2bh4hjygb-326843285189.asia-southeast1.run.app/api/order' 
+        : '/api/order';
+
+      const res = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -142,7 +149,15 @@ export default function App() {
         })
       });
 
-      const data = await res.json();
+      let data;
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        data = await res.json();
+      } else {
+        const text = await res.text();
+        console.error('Non-JSON response:', text);
+        throw new Error('সার্ভার থেকে সঠিক রেসপন্স পাওয়া যায়নি। (Server returned non-JSON)');
+      }
 
       if (!res.ok || data.error) {
         console.error('API Error:', data.error || 'Unknown error');
@@ -178,9 +193,9 @@ export default function App() {
         });
       }, 1000);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Network error:', error);
-      alert("সমস্যা হয়েছে! ইন্টারনেট কানেকশন চেক করুন বা পরে আবার চেষ্টা করুন।");
+      alert(`সমস্যা হয়েছে! ${error.message || 'ইন্টারনেট কানেকশন চেক করুন বা পরে আবার চেষ্টা করুন।'}`);
     }
   };
 
