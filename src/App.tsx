@@ -130,14 +130,7 @@ export default function App() {
     }
 
     try {
-      // Use the AI Studio backend proxy if running on GitHub Pages (freeviral.shop)
-      // Otherwise use the relative path for local development
-      const isProduction = window.location.hostname === 'freeviral.shop';
-      const apiUrl = isProduction 
-        ? 'https://ais-pre-ppwebzkzzz65h2bh4hjygb-326843285189.asia-southeast1.run.app/api/order' 
-        : '/api/order';
-
-      const res = await fetch(apiUrl, {
+      const res = await fetch('/api/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
