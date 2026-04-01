@@ -31,9 +31,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Override quantities to meet the minimum requirements of nstechfollows.com
   let actualQuantity = parseInt(quantity, 10) || 0;
   
-  // Service 12551 (TikTok/Likee Likes, Shares, Reports) min is 50
-  if (service === '12551' && actualQuantity < 50) {
-    actualQuantity = 50;
+  // Service 12518 (TikTok Likes) min is 10
+  if (service === '12518' && actualQuantity < 10) {
+    actualQuantity = 10;
+  }
+  // Service 12494 (TikTok Shares) min is 100
+  else if (service === '12494' && actualQuantity < 100) {
+    actualQuantity = 100;
   }
   // Service 12285 (TikTok/Likee Views) min is 100
   else if (service === '12285' && actualQuantity < 100) {
