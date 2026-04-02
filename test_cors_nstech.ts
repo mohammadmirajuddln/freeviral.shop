@@ -6,14 +6,16 @@ async function test() {
     params.append('key', '104aa75459b1cda29f342be919769bac');
     params.append('action', 'services');
 
-    const res = await fetch('https://api.codetabs.com/v1/proxy?quest=https://nstechfollows.com/api/v2', {
+    const res = await fetch('https://nstechfollows.com/api/v2', {
       method: 'POST',
+      headers: {
+        'Origin': 'https://freeviral.shop'
+      },
       body: params
     });
     
     console.log('Status:', res.status);
-    const text = await res.text();
-    console.log('Response:', text.substring(0, 100));
+    console.log('CORS Headers:', res.headers.raw());
   } catch (e) {
     console.error('Error:', e);
   }

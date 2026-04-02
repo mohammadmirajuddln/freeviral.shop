@@ -6,7 +6,7 @@ async function test() {
     params.append('key', '104aa75459b1cda29f342be919769bac');
     params.append('action', 'services');
 
-    const res = await fetch('https://api.codetabs.com/v1/proxy?quest=https://nstechfollows.com/api/v2', {
+    const res = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('https://nstechfollows.com/api/v2'), {
       method: 'POST',
       body: params
     });
