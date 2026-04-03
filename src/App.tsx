@@ -130,26 +130,16 @@ export default function App() {
     }
 
     try {
-      // Override quantities to meet the minimum requirements
-      let actualQuantity = parseInt(qty, 10) || 0;
-      if (actionId === '12518' && actualQuantity < 10) actualQuantity = 10;
-      else if (actionId === '12494' && actualQuantity < 100) actualQuantity = 100;
-      else if (actionId === '12285' && actualQuantity < 100) actualQuantity = 100;
-      else if (actionId === '12212' && actualQuantity < 100) actualQuantity = 100;
-
-      const params = new URLSearchParams();
-      params.append('key', '104aa75459b1cda29f342be919769bac'); // API Key exposed as requested
-      params.append('action', 'add');
-      params.append('service', actionId);
-      params.append('link', link);
-      params.append('quantity', actualQuantity.toString());
-
-      const res = await fetch('https://nstechfollows.com/api/v2', {
+      const res = await fetch('/api/order', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json',
         },
-        body: params
+        body: JSON.stringify({
+          service: actionId,
+          link: link,
+          quantity: qty
+        })
       });
 
       let data;
@@ -164,6 +154,8 @@ export default function App() {
 
       if (!res.ok || data.error) {
         console.error('API Error:', data.error || 'Unknown error');
+        
+        // Provide a more user-friendly message for insufficient balance
         if (data.error && data.error.toLowerCase().includes('sufficient balance')) {
           alert('দুঃখিত, বর্তমানে সার্ভারে পর্যাপ্ত ব্যালেন্স নেই। দয়া করে পরে আবার চেষ্টা করুন অথবা অ্যাডমিনের সাথে যোগাযোগ করুন।');
         } else {
