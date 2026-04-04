@@ -31,9 +31,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Override quantities to meet the minimum requirements of nstechfollows.com
   let actualQuantity = parseInt(quantity, 10) || 0;
   
-  // Service 12518 (TikTok Likes) min is 10
-  if (service === '12518' && actualQuantity < 10) {
-    actualQuantity = 10;
+  // Service 12587 (TikTok Likes) min is 20
+  if (service === '12587' && actualQuantity < 20) {
+    actualQuantity = 20;
   }
   // Service 12494 (TikTok Shares) min is 100
   else if (service === '12494' && actualQuantity < 100) {

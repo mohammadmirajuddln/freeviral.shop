@@ -10,10 +10,10 @@ const SERVICES = [
     gradient: 'bg-gradient-to-r from-gray-800 to-black',
     icon: 'https://cdn-icons-png.flaticon.com/512/3046/3046121.png',
     actions: [
-      { id: '12518', name: 'Like', icon: <Heart size={16} />, qty: '15' },
+      { id: '12587', name: 'Like', icon: <Heart size={16} />, qty: '20' },
       { id: '12285', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '12494', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '12518', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '12494', name: 'Share', icon: <Share2 size={16} />, qty: '100' },
+      { id: '12587', name: 'Report', icon: <Flag size={16} />, qty: '20' },
     ]
   },
   {
@@ -23,10 +23,10 @@ const SERVICES = [
     gradient: 'bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600',
     icon: 'https://cdn-icons-png.flaticon.com/512/174/174855.png',
     actions: [
-      { id: '12212', name: 'Like', icon: <Heart size={16} />, qty: '15' },
+      { id: '12212', name: 'Like', icon: <Heart size={16} />, qty: '100' },
       { id: '12212', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '12212', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '12212', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '12212', name: 'Share', icon: <Share2 size={16} />, qty: '100' },
+      { id: '12212', name: 'Report', icon: <Flag size={16} />, qty: '100' },
     ]
   },
   {
@@ -36,10 +36,10 @@ const SERVICES = [
     gradient: 'bg-gradient-to-r from-pink-500 to-rose-500',
     icon: 'https://cdn-icons-png.flaticon.com/512/2589/2589175.png',
     actions: [
-      { id: '12518', name: 'Like', icon: <Heart size={16} />, qty: '15' },
+      { id: '12587', name: 'Like', icon: <Heart size={16} />, qty: '20' },
       { id: '12285', name: 'View', icon: <Eye size={16} />, qty: '300' },
-      { id: '12494', name: 'Share', icon: <Share2 size={16} />, qty: '10' },
-      { id: '12518', name: 'Report', icon: <Flag size={16} />, qty: '1' },
+      { id: '12494', name: 'Share', icon: <Share2 size={16} />, qty: '100' },
+      { id: '12587', name: 'Report', icon: <Flag size={16} />, qty: '20' },
     ]
   }
 ];
