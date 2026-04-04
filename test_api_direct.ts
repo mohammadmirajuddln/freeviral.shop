@@ -1,25 +1,19 @@
 import fetch from 'node-fetch';
 
-async function testApi() {
-  const apiKey = '49514190f31742df7df997990278043e';
-  const url = 'https://bdlikefollower.com/api/v2';
-
+async function test() {
   const params = new URLSearchParams();
-  params.append('key', apiKey);
-  params.append('action', 'balance');
+  params.append('key', '104aa75459b1cda29f342be919769bac');
+  params.append('action', 'services');
 
   try {
-    console.log('Sending request to', url);
-    const response = await fetch(url, {
+    const response = await fetch('https://nstechfollows.com/api/v2', {
       method: 'POST',
       body: params
     });
-    console.log('Status:', response.status);
-    const text = await response.text();
-    console.log('Response:', text);
-  } catch (error) {
-    console.error('Error:', error);
+    const data = await response.json();
+    console.log('Success:', Array.isArray(data) ? `Got ${data.length} services` : data);
+  } catch (e) {
+    console.error('Error:', e);
   }
 }
-
-testApi();
+test();
