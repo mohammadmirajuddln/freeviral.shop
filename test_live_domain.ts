@@ -12,7 +12,7 @@ async function checkLive() {
     const resPost = await fetch('https://freeviral.shop/api/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ service: '12587', link: 'https://test.com', quantity: '100' })
+      body: JSON.stringify({ service: '12519', link: 'https://test.com', quantity: '15' })
     });
     console.log("POST Status:", resPost.status);
     const text = await resPost.text();
