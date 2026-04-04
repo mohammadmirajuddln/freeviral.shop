@@ -165,7 +165,6 @@ export default function App() {
       }
 
       console.log('Request sent successfully:', data);
-      alert("অনুরোধ পাঠানো হয়েছে! কিছুক্ষণ অপেক্ষা করুন।");
       
       // Clear existing timer if any
       if (intervalsRef.current[serviceId]) {
