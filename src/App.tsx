@@ -123,6 +123,12 @@ export default function App() {
 
   const sendRequest = async (serviceId: string, actionId: string, qty: string) => {
     playClickSound();
+    
+    if ((timers[serviceId] || 0) > 0) {
+      alert(`দয়া করে আরও ${timers[serviceId]} সেকেন্ড অপেক্ষা করুন!`);
+      return;
+    }
+
     const link = urls[serviceId];
     if (!link) {
       alert("লিঙ্ক পেস্ট করুন আগে!");
@@ -165,6 +171,7 @@ export default function App() {
       }
 
       console.log('Request sent successfully:', data);
+      alert("অর্ডার সফল হয়েছে! পরবর্তী অর্ডারের জন্য দয়া করে ১৮০ সেকেন্ড অপেক্ষা করুন।");
       
       // Clear existing timer if any
       if (intervalsRef.current[serviceId]) {
@@ -265,7 +272,7 @@ export default function App() {
                           className={`text-white border-none py-3 px-2 rounded-xl cursor-pointer text-sm flex flex-col items-center justify-center transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 ${service.gradient}`}
                         >
                           <span className="flex items-center gap-1.5 font-bold text-base">
-                            {action.icon} {action.name}
+                            {action.icon} {action.name} <span className="text-yellow-300 ml-1">+{action.qty}</span>
                           </span>
                           <span className="text-[10px] text-white/80 font-bold mt-1 uppercase tracking-wider bg-black/20 px-2 py-0.5 rounded-full">Active</span>
                         </button>
