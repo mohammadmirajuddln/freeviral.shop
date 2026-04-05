@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Copy, Heart, Eye, Share2, Flag, Link as LinkIcon, Sparkles, Rocket, Facebook, Send, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Analytics } from '@vercel/analytics/react';
 
 const SERVICES = [
   {
@@ -367,6 +368,7 @@ export default function App() {
         <p>© {new Date().getFullYear()} freeviral.shop. All rights reserved.</p>
         <p className="mt-1 text-xs">Boost your social presence securely.</p>
       </footer>
+      <Analytics />
     </div>
   );
 }
