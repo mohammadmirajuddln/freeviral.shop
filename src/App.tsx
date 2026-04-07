@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Copy, Heart, Eye, Share2, Flag, Link as LinkIcon, Sparkles, Rocket, Facebook, Send, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Analytics } from '@vercel/analytics/react';
@@ -82,6 +82,22 @@ export default function App() {
   const [urls, setUrls] = useState<Record<string, string>>({});
   const [timers, setTimers] = useState<Record<string, number>>({});
   const intervalsRef = useRef<Record<string, NodeJS.Timeout>>({});
+
+  useEffect(() => {
+    // Inject Adsterra Popunder script dynamically to ensure it works in React SPA
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = '//pl25897986.profitablecpmrate.com/6c/1a/b2/6c1ab2f3e4d5c6b7a890123456789abc.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Optional cleanup
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
 
   const togglePanel = (id: string) => {
     playClickSound();
