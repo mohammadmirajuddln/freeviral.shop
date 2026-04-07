@@ -84,15 +84,14 @@ export default function App() {
   const intervalsRef = useRef<Record<string, NodeJS.Timeout>>({});
 
   useEffect(() => {
-    // Inject Adsterra Popunder script dynamically to ensure it works in React SPA
+    // Inject Adsterra Native Banner script dynamically
     const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = '//pl25897986.profitablecpmrate.com/6c/1a/b2/6c1ab2f3e4d5c6b7a890123456789abc.js';
     script.async = true;
+    script.dataset.cfasync = "false";
+    script.src = "//pl29089921.profitablecpmratenetwork.com/f139bed64c586705dcb7d8c9131768e8/invoke.js";
     document.body.appendChild(script);
 
     return () => {
-      // Optional cleanup
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
