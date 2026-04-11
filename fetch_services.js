@@ -11,11 +11,8 @@ async function getServices() {
   const services = await response.json();
   
   if (Array.isArray(services)) {
-    const igLikes = services.filter(s => 
-      s.name.toLowerCase().includes('instagram') && 
-      s.name.toLowerCase().includes('like')
-    );
-    console.log("IG Likes:", igLikes[0]);
+    const views = services.find(s => s.service == 12285);
+    console.log("Views:", views);
   }
 }
 getServices();

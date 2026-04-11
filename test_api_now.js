@@ -4,7 +4,7 @@ async function test() {
   params.append('action', 'add');
   params.append('service', '12600');
   params.append('link', 'https://www.tiktok.com/@user/video/1234567890123456789');
-  params.append('quantity', '10');
+  params.append('quantity', '15');
 
   const response = await fetch('https://nstechfollows.com/api/v2', {
     method: 'POST',
