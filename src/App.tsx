@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Copy, Heart, Eye, Share2, Flag, Link as LinkIcon, Sparkles, Rocket, Facebook, Send, MessageCircle, Clipboard, Check, ShieldCheck, Flame } from 'lucide-react';
+import { Heart, Eye, Share2, Flag, Link as LinkIcon, Sparkles, Rocket, ShieldCheck, Clipboard, Flame } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
 import { PaidPackagesSection } from './components/PaidPackagesSection';
-import { WHATSAPP_DISPLAY } from './packagesData';
+import { ReferralSection } from './components/ReferralSection';
 
 interface ServiceAction {
   id: string;
@@ -98,7 +98,6 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'tiktok' | 'instagram' | 'paid'>('tiktok');
   const [urls, setUrls] = useState<Record<string, string>>({});
   const [timers, setTimers] = useState<Record<string, number>>({});
-  const [copiedLink, setCopiedLink] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const intervalsRef = useRef<Record<string, NodeJS.Timeout>>({});
 
@@ -134,39 +133,6 @@ export default function App() {
       alert("অনুগ্রহ করে আপনার লিংকটি বক্সে পেস্ট (Paste) করুন।");
     } catch (e) {
       alert("ক্লিপবোর্ড থেকে সরাসরি পেস্ট করা যায়নি। অনুগ্রহ করে বক্সে লং-প্রেস করে পেস্ট করুন।");
-    }
-  };
-
-  const copyToClipboard = () => {
-    playClickSound();
-    const link = "https://freeviral.shop";
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(link)
-        .then(() => {
-          setCopiedLink(true);
-          setTimeout(() => setCopiedLink(false), 3000);
-        })
-        .catch(err => console.error('Failed to copy: ', err));
-    } else {
-      alert("লিংকটি কপি করা হয়েছে: " + link);
-    }
-  };
-
-  const handleNativeShare = async () => {
-    playClickSound();
-    const shareData = {
-      title: 'freeviral.shop',
-      text: 'আপনার সোশ্যাল মিডিয়া অ্যাকাউন্ট বুস্ট করুন খুব সহজেই। 100% Free & Secure!',
-      url: 'https://freeviral.shop'
-    };
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (err) {
-        console.error('Error sharing:', err);
-      }
-    } else {
-      copyToClipboard();
     }
   };
 
@@ -544,83 +510,14 @@ export default function App() {
           </button>
         </div>
 
-        {/* Share Section */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center mb-6">
-          <p className="font-bold text-xs text-gray-400 mb-2 uppercase tracking-wider">বন্ধুদের সাথে শেয়ার করুন</p>
-          <div className="flex items-center justify-between bg-gray-50 border border-gray-200 rounded-2xl p-1.5 pl-4 mb-4">
-            <span className="text-purple-700 font-bold text-sm truncate">https://freeviral.shop</span>
-            <button 
-              onClick={copyToClipboard}
-              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white border-none py-2 px-4 rounded-xl cursor-pointer text-xs font-bold transition-transform active:scale-95 flex items-center gap-1.5 shadow-sm"
-            >
-              {copiedLink ? <Check size={14} /> : <Copy size={14} />}
-              <span>{copiedLink ? 'কপি হয়েছে' : 'কপি'}</span>
-            </button>
-          </div>
-
-          <div className="flex justify-center gap-3">
-            <a 
-              href="https://wa.me/?text=আপনার%20সোশ্যাল%20মিডিয়া%20অ্যাকাউন্ট%20বুস্ট%20করুন%20খুব%20সহজেই।%20100%25%20Free%20%26%20Secure!%20https://freeviral.shop" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              onClick={playClickSound}
-              className="w-11 h-11 bg-[#25D366] text-white rounded-2xl hover:-translate-y-1 transition-transform shadow-md flex items-center justify-center cursor-pointer"
-              title="Share on WhatsApp"
-            >
-              <MessageCircle size={20} />
-            </a>
-            <a 
-              href="https://www.facebook.com/sharer/sharer.php?u=https://freeviral.shop" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              onClick={playClickSound}
-              className="w-11 h-11 bg-[#1877F2] text-white rounded-2xl hover:-translate-y-1 transition-transform shadow-md flex items-center justify-center cursor-pointer"
-              title="Share on Facebook"
-            >
-              <Facebook size={20} />
-            </a>
-            <a 
-              href="https://t.me/share/url?url=https://freeviral.shop&text=আপনার%20সোশ্যাল%20মিডিয়া%20অ্যাকাউন্ট%20বুস্ট%20করুন%20খুব%20সহজেই।%20100%25%20Free%20%26%20Secure!" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              onClick={playClickSound}
-              className="w-11 h-11 bg-[#0088cc] text-white rounded-2xl hover:-translate-y-1 transition-transform shadow-md flex items-center justify-center cursor-pointer"
-              title="Share on Telegram"
-            >
-              <Send size={20} />
-            </a>
-            <button 
-              onClick={handleNativeShare} 
-              className="w-11 h-11 bg-gray-900 text-white rounded-2xl hover:-translate-y-1 transition-transform shadow-md flex items-center justify-center cursor-pointer"
-              title="Share via other apps"
-            >
-              <Share2 size={20} />
-            </button>
-          </div>
-        </div>
+        {/* Referral System Section (প্রতি রেফারে ৫ টাকা) */}
+        <ReferralSection playClickSound={playClickSound} />
         </>
         )}
 
-        {/* Contact Section */}
-        <div className="bg-white p-6 rounded-3xl shadow-md border-t-4 border-emerald-500 text-center mb-6">
-          <p className="font-bold text-gray-800 text-sm sm:text-base leading-relaxed mb-3">
-            টিকটক কয়েন দিয়ে ভিডিও প্রমোট করতে যোগাযোগ করুন:
-          </p>
-          <a 
-            href="https://wa.me/8801866906599" 
-            onClick={playClickSound}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] text-white no-underline py-3 px-6 rounded-2xl text-base font-bold shadow-md shadow-green-500/20 transition-transform hover:-translate-y-0.5 active:scale-95"
-          >
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-5 h-5 mr-2" />
-            01866906599
-          </a>
-        </div>
-
         {/* Footer */}
         <footer className="text-center py-6 text-gray-400 text-xs font-medium">
-          <p>© {new Date().getFullYear()} freeviral.shop. সর্বস্বত্ব সংরক্ষিত।</p>
+          <p>© 2018 freeviral.shop. সর্বস্বত্ব সংরক্ষিত।</p>
           <p className="mt-1 text-[11px] text-gray-400">নিরাপদ এবং তাৎক্ষণিক সোশ্যাল মিডিয়া সেবা।</p>
         </footer>
 

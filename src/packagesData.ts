@@ -215,21 +215,25 @@ export const WHATSAPP_DISPLAY = '01866906599';
 export const createWhatsAppOrderLink = (
   pkg: PremiumPackage,
   videoUrl?: string,
-  platform: 'TikTok' | 'Instagram' | 'যেকোনো' = 'যেকোনো'
+  platform?: string
 ) => {
-  const linkText = videoUrl && videoUrl.trim() ? videoUrl.trim() : 'লিংকটি হোয়াটসঅ্যাপে দিচ্ছি';
-  
+  const linkSection = videoUrl && videoUrl.trim() 
+    ? `\n🔗 ভিডিও লিংক: ${videoUrl.trim()}` 
+    : '\n🔗 ভিডিও লিংক: (হোয়াটসঅ্যাপে পাঠাচ্ছি)';
+    
+  const platformSection = platform && platform !== 'যেকোনো' 
+    ? `\n📱 প্ল্যাটফর্ম: ${platform}` 
+    : '';
+
   const message = `আসসালামু আলাইকুম!
 আমি freeviral.shop থেকে একটি পেইড প্যাকেজ অর্ডার করতে চাই:
 
 📦 প্যাকেজ: ${pkg.name} (${pkg.nameEn})
 ❤️ লাইক: ${pkg.likes}
 👁️ ভিউ: ${pkg.views}
-💰 মূল্য: ${pkg.price} টাকা
-📱 প্ল্যাটফর্ম: ${platform}
-🔗 ভিডিও লিংক: ${linkText}
+💰 মূল্য: ${pkg.price} টাকা${platformSection}${linkSection}
 
-দয়া করে পেমেন্টের নম্বর (বিকাশ/নগদ/রকেট) ও পরবর্তী নিয়ম জানিয়ে দিন। ধন্যবাদ!`;
+দয়া করে পেমেন্টের নম্বর (বিকাশ/নগদ/রকেট) জানিয়ে দিন। ধন্যবাদ!`;
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 };
