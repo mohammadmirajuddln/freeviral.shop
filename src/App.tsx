@@ -116,6 +116,45 @@ export default function App() {
     };
   }, []);
 
+  // 🛑 Block and suppress all ads when Paid Packages tab is active
+  useEffect(() => {
+    const stickyAd = document.getElementById('sticky-ad-container');
+    if (activeTab === 'paid') {
+      document.body.classList.add('paid-mode-active');
+      if (stickyAd) {
+        stickyAd.style.setProperty('display', 'none', 'important');
+      }
+
+      // Hide all dynamic floating/iframe/push ad elements
+      const hideAllAds = () => {
+        const adElements = document.querySelectorAll(
+          '#sticky-ad-container, iframe[src*="profitablecpmratenetwork"], iframe[src*="highperformanceformat"], iframe[src*="omg10"], [id^="pl290"], [class*="adsterra"], [id*="adsterra"], div[style*="z-index: 9999"], div[style*="z-index: 2147483647"], div[style*="z-index: 100000"]'
+        );
+        adElements.forEach(el => {
+          (el as HTMLElement).style.setProperty('display', 'none', 'important');
+          (el as HTMLElement).style.setProperty('pointer-events', 'none', 'important');
+        });
+      };
+
+      hideAllAds();
+      // Run once more after 300ms in case a script injects something asynchronously
+      const timer = setTimeout(hideAllAds, 300);
+      return () => clearTimeout(timer);
+    } else {
+      document.body.classList.remove('paid-mode-active');
+      if (stickyAd) {
+        stickyAd.style.removeProperty('display');
+      }
+      const adElements = document.querySelectorAll(
+        '#sticky-ad-container, iframe[src*="profitablecpmratenetwork"], iframe[src*="highperformanceformat"], iframe[src*="omg10"], [id^="pl290"], [class*="adsterra"], [id*="adsterra"], div[style*="z-index: 9999"], div[style*="z-index: 2147483647"], div[style*="z-index: 100000"]'
+      );
+      adElements.forEach(el => {
+        (el as HTMLElement).style.removeProperty('display');
+        (el as HTMLElement).style.removeProperty('pointer-events');
+      });
+    }
+  }, [activeTab]);
+
   const handleUrlChange = (id: string, value: string) => {
     setUrls(prev => ({ ...prev, [id]: value }));
   };
@@ -224,8 +263,8 @@ export default function App() {
       <header className="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-xs">
         <div className="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-pink-500 flex items-center justify-center text-white shadow-md shadow-purple-500/20">
-              <Rocket size={22} className="animate-pulse" />
+            <div className="w-11 h-11 rounded-2xl overflow-hidden border-2 border-purple-200/80 shadow-md shadow-purple-500/15 shrink-0 bg-white">
+              <img src="/logo.png" alt="FreeViral Logo" className="w-full h-full object-cover" />
             </div>
             <div>
               <span className="font-black text-2xl tracking-tight bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-transparent bg-clip-text">
@@ -278,7 +317,8 @@ export default function App() {
 
               {/* Paid Packages Tab */}
               <button
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   playClickSound();
                   setActiveTab('paid');
                 }}
@@ -320,7 +360,8 @@ export default function App() {
           <>
             {/* Promo Banner to Paid Packages */}
             <div 
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 playClickSound();
                 setActiveTab('paid');
               }}

@@ -209,8 +209,8 @@ export const PREMIUM_PACKAGES: PremiumPackage[] = [
   }
 ];
 
-export const WHATSAPP_NUMBER = '8801866906599';
-export const WHATSAPP_DISPLAY = '01866906599';
+export const WHATSAPP_NUMBER = '8801608746991';
+export const WHATSAPP_DISPLAY = '01608746991';
 
 export const createWhatsAppOrderLink = (
   pkg: PremiumPackage,

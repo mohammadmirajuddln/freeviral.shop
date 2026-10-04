@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+/* 🛑 Completely block and hide all ads when Paid Packages mode is active */
+body.paid-mode-active #sticky-ad-container,
+body.paid-mode-active [id^="pl290"],
+body.paid-mode-active [class*="adsterra"],
+body.paid-mode-active [id*="adsterra"],
+body.paid-mode-active iframe[src*="profitablecpmratenetwork"],
+body.paid-mode-active iframe[src*="highperformanceformat"],
+body.paid-mode-active iframe[src*="omg10"],
+body.paid-mode-active div[style*="z-index: 9999"],
+body.paid-mode-active div[style*="z-index: 2147483647"],
+body.paid-mode-active div[style*="z-index: 100000"],
+body.paid-mode-active div[style*="z-index: 99999"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}

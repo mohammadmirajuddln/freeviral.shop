@@ -21,14 +21,15 @@ export const PaidPackagesSection: React.FC<Props> = ({ playClickSound }) => {
     return true;
   });
 
-  const handleDirectWhatsApp = (pkg: PremiumPackage) => {
+  const handleDirectWhatsApp = (e: React.MouseEvent, pkg: PremiumPackage) => {
+    e.stopPropagation();
     playClickSound();
     const link = createWhatsAppOrderLink(pkg);
     window.open(link, '_blank');
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" onClick={(e) => e.stopPropagation()}>
       {/* Hero Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-950 via-purple-950 to-indigo-950 p-6 sm:p-7 text-white shadow-xl border border-purple-500/20">
         <div className="absolute -top-24 -right-24 w-60 h-60 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -185,7 +186,7 @@ export const PaidPackagesSection: React.FC<Props> = ({ playClickSound }) => {
             {/* Action Button - 1 click direct to WhatsApp */}
             <div className="p-4 pt-0">
               <button
-                onClick={() => handleDirectWhatsApp(pkg)}
+                onClick={(e) => handleDirectWhatsApp(e, pkg)}
                 className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white py-3.5 px-4 rounded-2xl font-black text-sm flex items-center justify-center gap-2 shadow-md shadow-green-500/20 cursor-pointer active:scale-95 transition-all"
                 title="হোয়াটসঅ্যাপে সরাসরি অর্ডার করুন"
               >
